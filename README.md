@@ -6,12 +6,7 @@ Two-role warehouse inventory app: admins manage stock, users browse the catalog.
 1. Place this folder in your XAMPP `htdocs` directory, for example `htdocs/project/warehouse_management_system`
 2. Start **Apache** and **MySQL** in XAMPP
 3. Import `database/schema.sql` in phpMyAdmin. This creates the `warehouse_management` database and the sample data
-4. Open `config/config.php` and set the database values to your local MySQL account. A typical XAMPP setup is:
-   - Host: `127.0.0.1`
-   - Port: `3306`
-   - Database: `warehouse_management`
-   - User: `root`
-   - Password: empty
+4. Copy `config/local.example.php` to `config/local.php`, then set your database host, name, user, and password in `local.php` only. A typical XAMPP setup uses host `127.0.0.1`, database `warehouse_management`, and user `root`
 5. Open `http://localhost/project/warehouse_management_system/`
 6. Sign in with a sample account from the table below
 7. As admin, open **Item Inventory** to add an item, or **Stock Movements** to record stock IN / OUT
@@ -45,7 +40,7 @@ warehouse_management_system/
 ├── user/                  Read-only catalog, dashboard, item details
 ├── api/items.php          Logged-in JSON item search
 ├── assets/css & js        Layout, filters, and form helpers
-├── config/                App settings and PDO connection
+├── config/                App settings. Real database password goes in local.php (gitignored)
 ├── database/schema.sql    MySQL tables and sample data
 ├── docs/screenshots/      Interface screenshots
 ├── includes/              Auth, CSRF, layout, helpers
@@ -60,20 +55,10 @@ warehouse_management_system/
 2. Start **Apache** and **MySQL**
 3. Open phpMyAdmin at `http://localhost/phpmyadmin`
 4. Import `database/schema.sql`
-5. Edit `config/config.php` so the database host, name, user, and password match that MySQL server
+5. Copy `config/local.example.php` to `config/local.php` and set the database host, name, user, and password there
 6. Open the project URL in the browser. If the folder is `htdocs/project/warehouse_management_system`, the address is `http://localhost/project/warehouse_management_system/`
 
-Use your own database account in `config/config.php`. Do not commit hosting usernames or passwords.
-
-Local example:
-
-```php
-define('DB_HOST', '127.0.0.1');
-define('DB_PORT', '3306');
-define('DB_NAME', 'warehouse_management');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-```
+`config/config.php` is safe to publish. It loads `config/local.php` when that file exists, and otherwise uses an empty password. `config/local.php` is listed in `.gitignore`.
 
 Command-line import:
 
@@ -160,7 +145,7 @@ Five failed passwords for the same username lock that login for 5 minutes.
 - Page output is escaped
 - The session cookie is `HttpOnly` and `SameSite=Lax`. The session id is regenerated on login
 - Direct access to `config/` and `database/` is blocked by `.htaccess`
-- Keep real database credentials in `config/config.php` on the machine that runs the app. Do not publish that file
+- Put the real database password only in `config/local.php`. That file is gitignored and must not be published
 
 ## License
 
