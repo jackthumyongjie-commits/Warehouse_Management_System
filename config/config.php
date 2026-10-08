@@ -23,7 +23,7 @@ if (is_file($localConfig)) {
     require_once $localConfig;
 }
 
-defined('DB_HOST') || define('DB_HOST', '127.0.0.1');
+defined('DB_HOST') || define('DB_HOST', 'localhost');
 defined('DB_PORT') || define('DB_PORT', '3306');
 defined('DB_NAME') || define('DB_NAME', 'warehouse_management');
 defined('DB_USER') || define('DB_USER', 'root');

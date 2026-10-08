@@ -6,8 +6,8 @@ Two-role warehouse inventory app: admins manage stock, users browse the catalog.
 1. Place this folder in your XAMPP `htdocs` directory, for example `htdocs/project/warehouse_management_system`
 2. Start **Apache** and **MySQL** in XAMPP
 3. Import `database/schema.sql` in phpMyAdmin. This creates the `warehouse_management` database and the sample data
-4. Copy `config/local.example.php` to `config/local.php`, then set your database host, name, user, and password in `local.php` only. A typical XAMPP setup uses host `127.0.0.1`, database `warehouse_management`, and user `root`
-5. Open `http://localhost/project/warehouse_management_system/`
+4. Copy `config/local.example.php` to `config/local.php`, then set your database host, name, user, and password in `local.php` only. A typical XAMPP setup uses host `localhost`, database `warehouse_management`, and user `root`
+5. Open http://localhost/project/warehouse_management_system/
 6. Sign in with a sample account from the table below
 7. As admin, open **Item Inventory** to add an item, or **Stock Movements** to record stock IN / OUT
 8. As a warehouse user, you can view the catalog and item details only
@@ -53,10 +53,10 @@ warehouse_management_system/
 ## 1. XAMPP setup
 1. Copy this folder under your XAMPP `htdocs` directory
 2. Start **Apache** and **MySQL**
-3. Open phpMyAdmin at `http://localhost/phpmyadmin`
+3. Open phpMyAdmin at http://localhost/phpmyadmin
 4. Import `database/schema.sql`
-5. Copy `config/local.example.php` to `config/local.php` and set the database host, name, user, and password there
-6. Open the project URL in the browser. If the folder is `htdocs/project/warehouse_management_system`, the address is `http://localhost/project/warehouse_management_system/`
+5. Copy `config/local.example.php` to `config/local.php` and set the database host to `localhost`, plus your database name, user, and password
+6. Open http://localhost/project/warehouse_management_system/
 
 `config/config.php` is safe to publish. It loads `config/local.php` when that file exists, and otherwise uses an empty password. `config/local.php` is listed in `.gitignore`.
 
@@ -78,7 +78,9 @@ These accounts are inserted by `database/schema.sql`. Change them after the firs
 | Administrator | `admin` | `admin123` | Items, stock IN/OUT, reports, users |
 | Warehouse user | `demo` | `user123` | Catalog and item history |
 
-An admin opens `admin/dashboard.php`. A warehouse user opens `user/dashboard.php`.
+Login: http://localhost/project/warehouse_management_system/login.php
+
+An admin opens the admin dashboard. A warehouse user opens the user dashboard.
 
 ## 3. Add items and move stock
 In **Item Inventory**, add an item with a code, name, category, location, unit, opening quantity, and reorder level. You can generate an item code from the form.
@@ -120,9 +122,7 @@ Five failed passwords for the same username lock that login for 5 minutes.
 ## 6. Item API
 `api/items.php` returns JSON for a logged-in session.
 
-```
-/api/items.php?search=mouse&category=Electronics
-```
+http://localhost/project/warehouse_management_system/api/items.php?search=mouse&category=Electronics
 
 - `search` matches item code, name, or location
 - `category` must match the category name exactly
