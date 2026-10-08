@@ -1,0 +1,13 @@
+# Prevent directory indexing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "(schema\.sql|config\.php|\.htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
